@@ -27,19 +27,19 @@ router.route('/register')
           req.flash('error', 'A verification email was sent to ' + user.email + '. Please verify your email')
           res.redirect('/auth/register')
         } else {
-          req.flash('failure', 'User already exists!')
+          req.flash('error', 'User already exists!')
           return res.redirect('/auth/register');
         }
       } else {
 
         const user = new User();
-        const { fullname, email, password, rpassword } = req.body;
-        if (!fullname || !email || !password || !rpassword) {
+        const { fullname, email, password, confirm_password } = req.body;
+        if (!fullname || !email || !password || !confirm_password) {
           req.flash('error', 'Please enter input fields');
           return res.redirect('/auth/register')
         }
 
-        if (password != rpassword) {
+        if (password != confirm_password) {
           req.flash('error', 'Passwords do not match');
           return res.redirect('/auth/register')
         }
@@ -60,19 +60,19 @@ router.route('/register')
           token.save(function (err) {
             if (err) { req.flash('error', err.message); }
 
-            sgMail.setApiKey(config.sendgrid_key);
-            const msg = {
-              to: user.email,
-              from: 'Kureen Homes <noreply@kureen.co>',
-              subject: 'Account Verification Token',
-              html: '<p>Hello,\n\n' + 'Please verify your account by clicking this link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n</p>',
-              templateId: 'd-5c6a81387a8f4e9fbaae472dbda2f790',
-              dynamic_template_data: {
-                name: user.fullname,
-                address: 'http:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.',
-              }
-            }
-            sgMail.send(msg)
+            // sgMail.setApiKey(config.sendgrid_key);
+            // const msg = {
+            //   to: user.email,
+            //   from: 'Kureen Homes <noreply@kureen.co>',
+            //   subject: 'Account Verification Token',
+            //   html: '<p>Hello,\n\n' + 'Please verify your account by clicking this link: \nhttp:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.\n</p>',
+            //   templateId: 'd-5c6a81387a8f4e9fbaae472dbda2f790',
+            //   dynamic_template_data: {
+            //     name: user.fullname,
+            //     address: 'http:\/\/' + req.headers.host + '\/confirmation\/' + token.token + '.',
+            //   }
+            // }
+            // sgMail.send(msg)
             req.flash('success', 'A verification email has been sent to ' + user.email + '.')
             req.logIn(user, function (err) {
               if (err) return next(err);

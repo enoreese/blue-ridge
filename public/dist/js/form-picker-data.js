@@ -4,18 +4,18 @@ $(document).ready(function() {
 	"use strict";
 	
 	/* Bootstrap Colorpicker Init*/
-	$('.colorpicker').colorpicker();
+	// $('.colorpicker').colorpicker();
 
-	$('.colorpicker-rgb').colorpicker({
-		color: '#AA3399',
-		format: 'rgba'
-	});
+	// $('.colorpicker-rgb').colorpicker({
+	// 	color: '#AA3399',
+	// 	format: 'rgba'
+	// });
 
-	$('.colorpicker-inline').colorpicker({
-		color: '#ffaa00',
-		container: true,
-		inline: true
-	});
+	// $('.colorpicker-inline').colorpicker({
+	// 	color: '#ffaa00',
+	// 	container: true,
+	// 	inline: true
+	// });
 	
 	/* Datetimepicker Init*/
 	$('#datetimepicker1').datetimepicker({
@@ -31,40 +31,40 @@ $(document).ready(function() {
 			$(this).data("DateTimePicker").date(moment());
 	});
 
-	$('#datetimepicker2').datetimepicker({
-			format: 'LT',
-			useCurrent: false,
-			icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                },
-		}).data("DateTimePicker").date(moment());;
+	// $('#datetimepicker2').datetimepicker({
+	// 		format: 'LT',
+	// 		useCurrent: false,
+	// 		icons: {
+    //                 time: "fa fa-clock-o",
+    //                 date: "fa fa-calendar",
+    //                 up: "fa fa-arrow-up",
+    //                 down: "fa fa-arrow-down"
+    //             },
+	// 	}).data("DateTimePicker").date(moment());;
 	 
-	$('#datetimepicker3').datetimepicker({
-			format: 'DD-MM-YYYY',
-			inline:true,
-			sideBySide: true,
-			icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                },
-	}); 
+	// $('#datetimepicker3').datetimepicker({
+	// 		format: 'DD-MM-YYYY',
+	// 		inline:true,
+	// 		sideBySide: true,
+	// 		icons: {
+    //                 time: "fa fa-clock-o",
+    //                 date: "fa fa-calendar",
+    //                 up: "fa fa-arrow-up",
+    //                 down: "fa fa-arrow-down"
+    //             },
+	// }); 
 
-	$('#datetimepicker4').datetimepicker({
-			inline:true,
-			sideBySide: true,
-			useCurrent: false,
-			icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                },
-	}).data("DateTimePicker").date(moment());
+	// $('#datetimepicker4').datetimepicker({
+	// 		inline:true,
+	// 		sideBySide: true,
+	// 		useCurrent: false,
+	// 		icons: {
+    //                 time: "fa fa-clock-o",
+    //                 date: "fa fa-calendar",
+    //                 up: "fa fa-arrow-up",
+    //                 down: "fa fa-arrow-down"
+    //             },
+	// }).data("DateTimePicker").date(moment());
 	
 	/* Daterange picker Init*/
 	$('.input-daterange-datepicker').daterangepicker({

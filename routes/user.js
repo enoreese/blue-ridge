@@ -26,21 +26,20 @@ var Transactions = paystack.transaction;
 
 // User DashBoard
 router.route('/dashboard')
-  .get((req, res, next) => {
-    res.render('customer/dashboard', { page: 'Dashboard' })
-    // User.findOne({ _id: req.user._id }, function (err, user) {
-    //   if (err) return next(err)
-    //   if (!user) {
-    //     req.flash('error', 'User does not exist');
-    //     res.redirect('/auth/login');
-    //   }
-    //   console.log('here')
+  .get(middleware.isLoggedIn, (req, res, next) => {
+    User.findOne({ _id: req.user._id }, function (err, user) {
+      if (err) return next(err)
+      if (!user) {
+        req.flash('error', 'User does not exist');
+        res.redirect('/auth/login');
+      }
+      console.log('here')
 
-    //   if (user.role === 2) {
-    //     console.log(user)
-    //     res.render('customer/dashboard', { page: 'Dashboard' })
-    //   }
-    // })
+      if (user.role === 2) {
+        console.log(user)
+        res.render('customer/dashboard', { user: user, page: 'Dashboard' })
+      }
+    })
   })
   .post(middleware.isLoggedIn, (req, res, next) => {
     Code.findOne({ code: req.body.verification }, function (err, code) {
@@ -78,23 +77,22 @@ router.route('/dashboard')
 
 
 router.route('/transactions')
-  .get((req, res, next) => {
-    res.render('customer/transactions', { page: 'Pricing' })
-    // User.findOne({ _id: req.user._id }, function (err, user) {
-    //   if (err) return next(err)
-    //   if (!user) {
-    //     req.flash('error', 'User does not exist');
-    //     res.redirect('/auth/login');
-    //   }
+  .get(middleware.isLoggedIn, (req, res, next) => {
+    User.findOne({ _id: req.user._id }, function (err, user) {
+      if (err) return next(err)
+      if (!user) {
+        req.flash('error', 'User does not exist');
+        res.redirect('/auth/login');
+      }
 
-    //   console.log('dashboard')
+      console.log('dashboard')
 
-    //   if (user.role === 2) {
-    //     console.log(user)
-    //     res.render('customer/transactoins', { page: 'Pricing' })
-    //   }
+      if (user.role === 2) {
+        console.log(user)
+        res.render('customer/transactions', { user: user, page: 'Transactions' })
+      }
 
-    // })
+    })
   })
 
 router.post('/change-password', middleware.isLoggedIn, (req, res, next) => {
@@ -140,37 +138,38 @@ router.post('/change-password', middleware.isLoggedIn, (req, res, next) => {
 
 
 router.route('/profile')
-  .get((req, res, next) => {
-    res.render('customer/profile', { page: 'Profile' })
-    // User.findById({ _id: req.user._id }, function (err, user) {
-    //   if (err) return next(err)
-    //   if (!user) {
-    //     req.flash('error', 'User does not exist');
-    //     res.redirect('/auth/login');
-    //   }
+  .get(middleware.isLoggedIn, (req, res, next) => {
+    User.findById({ _id: req.user._id }, function (err, user) {
+      if (err) return next(err)
+      if (!user) {
+        req.flash('error', 'User does not exist');
+        res.redirect('/auth/login');
+      }
 
-    //   console.log('Profile route');
+      console.log('Profile route');
 
-    //   Activity.find({ owner: user._id }, (err, activities) => {
-    //     if (err) return next(err);
+      Activity.find({ owner: user._id }, (err, activities) => {
+        if (err) return next(err);
 
-    //     var notifications = []
-    //     activities.forEach((activity) => {
-    //       if (activity.read === false) {
-    //         activity.created = timeDifference(activity.created);
-    //         notifications.push(activity);
-    //       }
-    //     })
-    //     if (user.role === 2) {
-    //       console.log(user)
-    //       res.render('customer/profile', { user: user, notifications: notifications, page: 'Profile' })
-    //     }
-    //   })
-    // })
+        var notifications = []
+        activities.forEach((activity) => {
+          if (activity.read === false) {
+            activity.created = timeDifference(activity.created);
+            notifications.push(activity);
+          }
+        })
+        if (user.role === 2) {
+          console.log(user)
+          res.render('customer/profile', { user: user, notifications: notifications, page: 'Profile' })
+        }
+      })
+    })
   })
   .post(middleware.isLoggedIn, (req, res, next) => {
     User.findById({ _id: req.user._id }, function (err, user) {
       if (err) return next(err);
+
+      console.log(req.body)
 
       if (!user) {
         req.flash('error', 'User does not exist');
@@ -180,13 +179,12 @@ router.route('/profile')
       if (req.body.fullname) {
         user.fullname = req.body.fullname
       }
-      if (req.body.phonenumber) {
-        user.phonenumber = req.body.phonenumber;
+      if (req.body.gender) {
+        user.gender = req.body.gender;
       }
-      if (req.body.email) {
-        req.body.email;
+      if (req.body.dob) {
+        user.dob = req.body.dob;
       }
-
       if (req.body.address) {
         user.address = req.body.address;
       }
@@ -209,8 +207,12 @@ router.route('/profile')
       if (req.body.instagram) {
         user.instagram = req.body.instagram;
       }
-      if (req.body.facebook) {
-        user.facebook = req.user.facebook;
+
+      if (req.body.fxcm_api_key) {
+        user.fxcm_api_key = req.body.fxcm_api_key;
+      }
+      if (req.body.fxcm_api_secret) {
+        user.fxcm_api_secret = req.body.fxcm_api_secret;
       }
 
       user.save((err) => {
