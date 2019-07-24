@@ -35,10 +35,23 @@ router.route('/dashboard')
       }
       console.log('here')
 
-      if (user.role === 2) {
-        console.log(user)
-        res.render('customer/dashboard', { user: user, page: 'Dashboard' })
-      }
+      Activity.find({ owner: user._id }, (err, activities) => {
+        if (err) return next(err);
+
+        var notifications = []
+        activities.forEach((activity) => {
+          if (activity.read === false) {
+            notifications.push({
+              content: activity.content,
+              created: timeDifference(activity.created)
+            });
+          }
+        })
+        if (user.role === 2) {
+          console.log(user)
+          res.render('customer/dashboard', { user: user, notifications: notifications, page: 'Dashboard' })
+        }
+      })      
     })
   })
   .post(middleware.isLoggedIn, (req, res, next) => {

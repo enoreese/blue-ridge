@@ -9,21 +9,24 @@ const Code = require('../models/code');
 const africastalking = require('africastalking');
 var unirest = require('unirest');
 const nodemailer = require('nodemailer');
+const ejs = require('ejs');
+var handlebars = require('handlebars');
+
 
 const admin = 1;
 const kustomer = 2;
 const kureener = 3;
 
 const transporter = nodemailer.createTransport({
-  service: "yahoo",
+  service: config.nodemailer_service,
   transport: "SMTP",
   host: "smtp.yahoo.com",
   secureConnection: false,
   port: 587,
   requiresAuth: true,
   auth: {
-    user: 'olorunfemikawonise@rocketmail.com',
-    pass: 'expendable_007'
+    user: config.nodemailer_username,
+    pass: config.nodemailer_password
   }
 });
 
@@ -66,21 +69,7 @@ router.route('/register')
             req.flash('error', err.message);
             return next(err);
           }
-          var email_text = "Hello " + fullname + "\n" + "Thank you for registering" + "\n" + "This payment is via Paystack account" + "\n";
-          var mailOptions = {
-            from: 'olorunfemikawonise@rocketmail.com',
-            to: email,
-            subject: 'Welcome to Blueridge Investing',
-            text: email_text
-          };
 
-          transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-              console.log(error + "........++++------------***************");
-            } else {
-              console.log('Email sent: ' + info.response);
-            }
-          });
           // Create a verification token for this user
           var token = new Token({ _userId: user._id, token: crypto.randomBytes(16).toString('hex') });
 
@@ -101,10 +90,34 @@ router.route('/register')
             //   }
             // }
             // sgMail.send(msg)
-            req.flash('success', 'A verification email has been sent to ' + user.email + '.')
-            req.logIn(user, function (err) {
-              if (err) return next(err);
-              res.redirect('/auth/login')
+
+            ejs.renderFile('./views/emails' + "/registeration.ejs", { 
+              fullname: user.fullname,
+              link:  'http:\/\/' + req.headers.host + '\/auth/confirmation\/' + token.token + '.'
+            }, function (err, data) {
+              if (err) {
+                console.log(err);
+              } else {
+                var email_text = "Hello " + fullname + "\n" + "Thank you for registering" + "\n" + "This payment is via Paystack account" + "\n";
+                var mailOptions = {
+                  from: config.nodemailer_username,
+                  to: email,
+                  subject: 'Welcome to Blueridge',
+                  html: data
+                };
+
+                transporter.sendMail(mailOptions, function (error, info) {
+                  if (error) {
+                    console.log(error + "........++++------------***************");
+                  } else {
+                    req.flash('success', 'A verification email has been sent to ' + user.email + '.')
+                    req.logIn(user, function (err) {
+                      if (err) return next(err);
+                      res.redirect('/auth/login')
+                    });
+                  }
+                });
+              }
             });
           })
         });
@@ -126,12 +139,12 @@ router.get('/confirmation/:token_id', (req, res, next) => {
     User.findOne({ _id: token._userId }, function (err, user) {
       if (!user) {
         req.flash('error', 'We were unable to find a user for this token.')
-        return res.redirect('/register')
+        return res.redirect('/auth/register')
       }
 
-      if (user.isEmailVerified) {
+      if (user.isVerified) {
         req.flash('error', 'This users email has already been verified.');
-        return res.redirect('/login')
+        return res.redirect('/auth/login')
       }
 
       // Verify and save the user
@@ -140,7 +153,7 @@ router.get('/confirmation/:token_id', (req, res, next) => {
         if (err) return next(err);
         console.log(user)
         req.flash('success', 'Your account has been verified. Please log in.');
-        return res.redirect('/login');
+        return res.redirect('/auth/login');
       });
     });
   });
