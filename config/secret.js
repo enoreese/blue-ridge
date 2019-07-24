@@ -5,5 +5,8 @@ module.exports = {
     paystack_pk: process.env.PAYSTACK_PK || '',
     sendgrid_key: process.env.SENDGRID_KEY || '',
     twitter_consumer_key: process.env.TWITTER_CONSUMER_KEY || '',
-    twitter_consumer_secret: process.env.TWITTER_CONSUMER_SECRET || ''
+    twitter_consumer_secret: process.env.TWITTER_CONSUMER_SECRET || '',
+    nodemailer_username: process.env.NODEMAILER_USERNAME || 'olorunfemikawonise@rocketmail.com',
+    nodemailer_password: process.env.NODEMAILER_PASSWORD || 'expendable_007',
+    nodemailer_service: process.env.NODEMAILER_SERVICE || 'yahoo'
 }
