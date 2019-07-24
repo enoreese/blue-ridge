@@ -235,6 +235,37 @@ router.route('/profile')
     })
   })
 
+  router.route('/new-bot')
+  .get(middleware.isLoggedIn, (req, res, next) => {
+    User.findOne({ _id: req.user._id }, function (err, user) {
+      if (err) return next(err)
+      if (!user) {
+        req.flash('error', 'User does not exist');
+        res.redirect('/auth/login');
+      }
+
+      console.log('New Bot route');
+
+      Activity.find({ owner: user._id }, (err, activities) => {
+        if (err) return next(err);
+
+        var notifications = []
+        activities.forEach((activity) => {
+          if (activity.read === false) {
+            activity.created = timeDifference(activity.created);
+            notifications.push(activity);
+          }
+        })
+
+        if (user.role === 2) {
+          console.log(user)
+          res.render('customer/new_bot', { user: user, notifications: notifications, page: 'New Bot' })
+        }
+      })
+
+    })
+  })
+
 router.route('/settings')
   .get(middleware.isLoggedIn, (req, res, next) => {
     User.findOne({ _id: req.user._id }, function (err, user) {
