@@ -15,85 +15,85 @@ $(document).ready(function(){
 if($('#chart_1').length > 0) {
 	// Line Chart
 	var data=[{
-		period: '2010',
-		iphone: 50,
-		ipad: 80,
-		itouch: 20
+		period: 'January',
+		USDJPY: 50,
+		GBPAUD: 80,
+		AUDZAR: 20
 	}, {
-		period: '2011',
-		iphone: 130,
-		ipad: 100,
-		itouch: 80
+		period: 'February',
+		USDJPY: 130,
+		GBPAUD: 100,
+		AUDZAR: 80
 	}, {
-		period: '2012',
-		iphone: 80,
-		ipad: 60,
-		itouch: 70
+		period: 'March',
+		USDJPY: 80,
+		GBPAUD: 60,
+		AUDZAR: 70
 	}, {
-		period: '2013',
-		iphone: 70,
-		ipad: 200,
-		itouch: 140
+		period: 'April',
+		USDJPY: 70,
+		GBPAUD: 200,
+		AUDZAR: 140
 	}, {
-		period: '2014',
-		iphone: 180,
-		ipad: 150,
-		itouch: 140
+		period: 'May',
+		USDJPY: 180,
+		GBPAUD: 150,
+		AUDZAR: 140
 	}, {
-		period: '2015',
-		iphone: 105,
-		ipad: 100,
-		itouch: 80
+		period: 'June',
+		USDJPY: 105,
+		GBPAUD: 100,
+		AUDZAR: 80
 	},
 	 {
-		period: '2016',
-		iphone: 250,
-		ipad: 150,
-		itouch: 200
+		period: 'July',
+		USDJPY: 250,
+		GBPAUD: 150,
+		AUDZAR: 200
 	}];
 	var dataNew=[{
-		period: '2010',
-		iphone: 10,
-		ipad: 80,
-		itouch: 40
+		period: 'January',
+		USDJPY: 10,
+		GBPAUD: 80,
+		AUDZAR: 40
 	}, {
-		period: '2011',
-		iphone: 110,
-		ipad: 150,
-		itouch: 80
+		period: 'February',
+		USDJPY: 110,
+		GBPAUD: 150,
+		AUDZAR: 80
 	}, {
-		period: '2012',
-		iphone: 80,
-		ipad: 60,
-		itouch: 70
+		period: 'March',
+		USDJPY: 80,
+		GBPAUD: 60,
+		AUDZAR: 70
 	}, {
-		period: '2013',
-		iphone: 70,
-		ipad: 100,
-		itouch: 190
+		period: 'April',
+		USDJPY: 70,
+		GBPAUD: 100,
+		AUDZAR: 190
 	}, {
-		period: '2014',
-		iphone: 180,
-		ipad: 150,
-		itouch: 140
+		period: 'May',
+		USDJPY: 180,
+		GBPAUD: 150,
+		AUDZAR: 140
 	}, {
-		period: '2015',
-		iphone: 315,
-		ipad: 100,
-		itouch: 80
+		period: 'June',
+		USDJPY: 315,
+		GBPAUD: 100,
+		AUDZAR: 80
 	},
 	 {
-		period: '2016',
-		iphone: 850,
-		ipad: 120,
-		itouch: 100
+		period: 'July',
+		USDJPY: 850,
+		GBPAUD: 120,
+		AUDZAR: 100
 	}];
 	var lineChart = Morris.Area({
 		element: 'chart_1',
 		data: data,
 		xkey: 'period',
-		ykeys: ['iphone', 'ipad', 'itouch'],
-		labels: ['iPhone', 'iPad', 'iPod Touch'],
+		ykeys: ['USDJPY', 'GBPAUD', 'AUDZAR'],
+		labels: ['USDJPY', 'GBPAUD', 'AUDZAR'],
 		pointSize: 3,
 		lineWidth: 2,
 		pointStrokeColors:['#ff6028'],
@@ -135,11 +135,11 @@ if($('#chart_1').length > 0) {
 $(window).on("load",function(){
 	window.setTimeout(function(){
 		$.toast({
-			heading: 'Welcome to Admintres',
-			text: 'Use the predefined ones, or specify a custom position object.',
+			heading: 'Welcome back to Blueridge',
+			// text: 'Use the predefined ones, or specify a custom position object.',
 			position: 'bottom-right',
 			loaderBg:'#e8af48',
-			icon: 'warning',
+			icon: 'success',
 			hideAfter: 3500, 
 			stack: 6
 		});
