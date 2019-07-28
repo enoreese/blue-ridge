@@ -549,287 +549,438 @@
 
 <!-- Main Content -->
 <div class="page-wrapper">
-        <div class="container">
-            
-            <!-- Title -->
-            <div class="row heading-bg">
-                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                  <h5 class="txt-dark">form wizard</h5>
-                </div>
-                <!-- Breadcrumb -->
-                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                  <ol class="breadcrumb">
+    <div class="container">
+
+        <!-- Title -->
+        <div class="row heading-bg">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            </div>
+            <!-- Breadcrumb -->
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
                     <li><a href="/dashboard">Dashboard</a></li>
                     <li class="active"><span>New Bot</span></li>
-                  </ol>
-                </div>
-                <!-- /Breadcrumb -->
+                </ol>
             </div>
-            <!-- /Title -->
-                        
-            
-            <!-- Row -->
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel panel-default border-panel card-view">
-                        <div class="panel-heading">
-                            <div class="pull-left">
-                                <h6 class="panel-title txt-dark">Start New Bot</h6>
-                            </div>
-                            <div class="clearfix"></div>
+            <!-- /Breadcrumb -->
+        </div>
+        <!-- /Title -->
+
+
+        <!-- Row -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default border-panel card-view">
+                    <div class="panel-heading">
+                        <div class="pull-left">
+                            <h6 class="panel-title txt-dark">Start New Bot</h6>
                         </div>
-                        <div class="panel-wrapper collapse in">
-                            <div class="panel-body">
-                                <form id="example-advanced-form" action="#">
-                                    <h3><span class="number"><i class="icon-user-following txt-black"></i></span><span class="head-font capitalize-font">basic details</span></h3>
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-wrap">
-                                                    <div class="form-group">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon"><i class="icon-user"></i></div>
-                                                            <input type="text" class="form-control required"  name="Username" id="exampleInputuname" placeholder="Username">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-                                                            <input type="email" class="form-control required" id="exampleInputEmail" name="email" placeholder="Enter email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon"><i class="icon-lock"></i></div>
-                                                            <input id="password-2" type="password" class="form-control required" name="password" placeholder="Enter password">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group mb-0">
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon"><i class="icon-lock"></i></div>
-                                                            <input type="password" class="form-control required"  id="confirm-2" name="confirm"  placeholder="confirm password">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                     
-                                    <h3><span class="number"><i class="icon-bag txt-black"></i></span><span class="head-font capitalize-font">trade rules</span></h3>
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="form-wrap">
-                                                    <div class="form-group">
-                                                        <label class="control-label mb-10" for="exampleCountry">country:</label>
-                                                        <select id="exampleCountry" class="form-control required" name="country">
-                                                            <option value="1">India</option>
-                                                            <option value="2">Australia</option>
-                                                            <option value="3">USA</option>
-                                                            <option value="4">Japan</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-md-6 col-xs-12">
-                                                                <label class="control-label mb-10" for="firstName">first name:</label>
-                                                                <input id="firstName" type="text" name="first_name" class="form-control required" value="" />
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-wrapper collapse in">
+                        <div class="panel-body">
+                            <form id="example-advanced-form" action="#">
+                                <h3><span class="number"><i class="icon-user-following txt-black"></i></span><span
+                                        class="head-font capitalize-font">Risk Tolerance</span></h3>
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-6">
+                                            <div class="form-wrap">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <label class="control-label mb-10">1. Understanding the
+                                                            potential upsides and downsides of
+                                                            each portfolio, which portfolio would you
+                                                            prefer to hold?</label>
+                                                        <div class="radio-list">
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_1" required id="radio_5"
+                                                                        value="1">
+                                                                    <label for="radio_5">Portfolio 1. $11,407(BCR)
+                                                                        $10,413(PR)
+                                                                        $9,232(WCR)</label>
+                                                                </span>
                                                             </div>
-                                                            <div class="span1"></div>
-                                                            <div class="col-md-6 col-xs-12">
-                                                                <label class="control-label mb-10" for="lastName">last name:</label>
-                                                                <input id="lastName" type="text" name="last_name" class="form-control required" value="" />
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_1" id="radio_6"
+                                                                        value="2">
+                                                                    <label for="radio_6"> Portfolio 2. $11,863(BCR)
+                                                                        $10,469(PR)
+                                                                        $8,948(WCR) </label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_1" id="radio_7"
+                                                                        value="3">
+                                                                    <label for="radio_7"> Portfolio 3. $12,473(BCR)
+                                                                        $10,530(PR)
+                                                                        $8,521(WCR) </label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_1" id="radio_8"
+                                                                        value="4">
+                                                                    <label for="radio_8"> Portfolio 4. $12,923(BCR)
+                                                                        $10,572(PR)
+                                                                        $8,159(WCR) </label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_1" id="radio_9"
+                                                                        value="5">
+                                                                    <label for="radio_9"> Portfolio 5. $13,387(BCR)
+                                                                        $10,614(PR)
+                                                                        $7,767(WCR) </label>
+                                                                </span>
+                                                            </div>
+                                                            <span style="color: black; font-size: 12px">BCR - Best Case
+                                                                Result, PR - Probable Result, WCR - Worst Case
+                                                                Result</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <label class="control-label mb-10">2. Which of these choices
+                                                            best reflects your
+                                                            attitude toward inflation and risk?
+                                                            prefer to hold?</label>
+                                                        <div class="radio-list">
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_2" required id="q_2_1"
+                                                                        value="1">
+                                                                    <label for="q_2_1">Avoid loss, keep up with
+                                                                        inflation.</label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_2" id="q_2_2" value="2">
+                                                                    <label for="q_2_2">Slightly more than inflation,
+                                                                        low risk level.</label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_2" id="q_2_3" value="3">
+                                                                    <label for="q_2_3"> Accept short term losses,
+                                                                        aggressive performance </label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_2" id="q_2_4" value="4">
+                                                                    <label for="q_2_4"> Maximize portfolio, high risk,
+                                                                        aggressive performance </label>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label mb-10" for="addressDetail">Address:</label>
-                                                        <input id="addressDetail"  type="text" name="address" class="form-control required" value="" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <label class="control-label mb-10">3. Investing involves a
+                                                            trade–off between risk
+                                                            and return. Which statement best describes
+                                                            your investment goals?</label>
+                                                        <div class="radio-list">
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_3" required id="q_3_1"
+                                                                        value="1">
+                                                                    <label for="q_3_1"> Protect the value of my account.
+                                                                        accept the lower
+                                                                        long–term returns.</label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_3" id="q_3_2" value="2">
+                                                                    <label for="q_3_2">Keep risk to a minimum. achieve
+                                                                        slightly higher returns.</label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_3" id="q_3_3" value="3">
+                                                                    <label for="q_3_3"> Focus more on the long-term
+                                                                        investment returns. Long-term growth. </label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_3" id="q_3_4" value="4">
+                                                                    <label for="q_3_4"> Maximize long–term investment
+                                                                        returns. </label>
+                                                                </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label mb-10" for="cityName">city:</label>
-                                                        <select id="cityName" class="form-control required" name="country">
-                                                            <option value="">Banglore</option>
-                                                            <option value="">Pune</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label mb-10" for="stateName">state:</label>
-                                                        <select id="stateName" class="form-control required" name="country">
-                                                            <option value="">Karnataka</option>
-                                                            <option value="">Maharashtra</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label mb-10" for="postalCode">zip/postal code:</label>
-                                                        <input id="postalCode" type="text" name="zip_code"  data-mask="99999-9999" class="form-control required" value="" />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label mb-10" for="phoneNumber">phone number:</label>
-                                                        <input type="text" id="phoneNumber"  data-mask="+40 999 999 999" name="phone_number" class="form-control required" value="" />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label mb-10" for="emailAddress">email address:</label>
-                                                        <input id="emailAddress" type="text" name="email_address" class="form-control required" value="" />
-                                                    </div>
-                                                    <div class="form-group mb-0">
-                                                        <div class="checkbox checkbox-success">
-                                                            <input id="checkbox_1" type="checkbox">
-                                                            <label for="checkbox_1">Billing address is same as shipping address.</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <label class="control-label mb-10">4. I am comfortable with
+                                                            investments that may
+                                                            frequently experience large declines in value
+                                                            if there is a potential for higher returns.
+                                                            Does this describe you?</label>
+                                                        <div class="radio-list">
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_4" required id="q_4_1"
+                                                                        value="1">
+                                                                    <label for="q_4_1"> a. Strongly disagree.</label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_4" id="q_4_2" value="2">
+                                                                    <label for="q_4_2">b. Disagree.</label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <span class="radio radio-info">
+                                                                    <input type="radio" name="q_4" id="q_4_3" value="3">
+                                                                    <label for="q_4_3"> c. Agree. </label>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </fieldset>
-                                 
-                                    <h3><span class="number"><i class="icon-credit-card txt-black"></i></span><span class="head-font capitalize-font">payment</span></h3>
-                                        <fieldset>
-                                        <!--CREDIT CART PAYMENT-->
-                                        <div class="row">
-                                            <div class="col-sm-12">
+                                    </div>
+                                </fieldset>
+
+                                <h3><span class="number"><i class="icon-bag txt-black"></i></span><span
+                                        class="head-font capitalize-font">trade rules</span></h3>
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-wrap">
                                                 <div class="form-group">
-                                                    <label class="control-label mb-10" for="CreditCardType">card type:</label>
-                                                    <select id="CreditCardType" name="CreditCardType" class="form-control required">
-                                                        <option value="5">Visa</option>
-                                                        <option value="6">MasterCard</option>
-                                                        <option value="7">American Express</option>
-                                                        <option value="8">Discover</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label mb-10" for="cardNo">Credit Card Number:</label>
-                                                    <input type="text" id="cardNo" data-mask="9999-9999-9999-9999" class="form-control required" name="car_number" value="" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label mb-10" for="cvv">card cvv:</label>
-                                                    <input type="text" id="cvv" class="form-control  required" data-mask="999" name="car_code" value="" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label mb-10">expiration date:</label>
                                                     <div class="row">
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <select class="form-control required" name="month">
-                                                                <option value="">Month</option>
-                                                                <option value="1">01</option>
-                                                                <option value="2">02</option>
-                                                                <option value="3">03</option>
-                                                                <option value="4">04</option>
-                                                                <option value="5">05</option>
-                                                                <option value="6">06</option>
-                                                            </select>
+                                                        <div class="col-md-6 col-xs-12">
+                                                            <label class="control-label mb-10" for="firstName">Balance
+                                                                threshold (%):</label>
+                                                            <input id="firstName" type="number" required
+                                                                name="first_name" class="form-control" value="" />
                                                         </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                            <select class="form-control required" name="year">
-                                                                <option value="1">Year</option>
-                                                                <option value="2">2001</option>
-                                                            </select>
+                                                        <div class="span1"></div>
+                                                        <div class="col-md-6 col-xs-12">
+                                                            <label class="control-label mb-10" for="lastName">last
+                                                                name:</label>
+                                                            <input id="lastName" type="text" required name="last_name"
+                                                                class="form-control" value="" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group mb-0">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <ul class="cards">
-                                                                <li class="visa hand"><img src="../img/1-s.png" alt="card"/></li>
-                                                                <li class="mastercard hand"><img src="../img/2-s.png" alt="card"/></li>
-                                                                <li class="amex hand"><img src="../img/3-s.png" alt="card"/></li>
-                                                                <li class="amex hand"><img src="../img/4-s.png" alt="card"/></li>
-                                                                </ul>
-                                                            <div class="clearfix"></div>
+                                                <div class="seprator-block"></div>
+                                                <!-- <h6 class="txt-dark capitalize-font"><i
+                                                        class="fa fa-rocket mr-10"></i>subscription</h6> -->
+
+                                                <div class="seprator-block"></div>
+                                                <h6 class="txt-dark capitalize-font"><i
+                                                        class="fa fa-bell mr-10"></i>notifications</h6>
+                                                <div class="form-group">
+                                                    <div class="col-md-6">
+                                                        <div class="checkbox checkbox-inline">
+                                                            <input id="checkbox1" type="checkbox">
+                                                            <label for="checkbox1">
+                                                                Email
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="checkbox checkbox-inline">
+                                                            <input id="checkbox2" type="checkbox">
+                                                            <label for="checkbox2">
+                                                                SMS
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
                                             </div>
                                         </div>
-                                        <!--CREDIT CART PAYMENT END-->
-                                    </fieldset>
-                                 
-                                    <h3><span class="number"><i class="icon-basket-loaded txt-black"></i></span><span class="head-font capitalize-font">review cart</span></h3>
-                                    <fieldset>
-                                            <table class="table display product-overview" id="datable_1">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Photo</th>
-                                                        <th>Product</th>
-                                                        <th>Quantity</th>
-                                                        <th>price</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th colspan="3">Subtotal:</th>
-                                                        <th></th>
-                                                        <th></th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="../img/chair.jpg" alt="iMac" width="80">
-                                                        </td>
-                                                        <td>Rounded Chair</td>
-                                                        <td>
-                                                        <input class="vertical-spin" type="text" data-bts-button-down-class="btn btn-default"   data-bts-button-up-class="btn btn-default" value="20" name="vertical-spin">
-                                                        </td>
-                                                        <td>$400</td>
-                                                        
-                                                        <td><a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="../img/chair2.jpg" alt="iMac" width="80">
-                                                        </td>
-                                                        <td>Rounded Chair</td>
-                                                        <td>
-                                                            <input class="vertical-spin" type="text" data-bts-button-down-class="btn btn-default"   data-bts-button-up-class="btn btn-default" value="10" name="vertical-spin">
-                                                        </td>
-                                                        <td>$450</td>
-                                                        <td><a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="../img/chair3.jpg" alt="iMac" width="80">
-                                                        </td>
-                                                        <td>Rounded Chair</td>
-                                                        <td>
-                                                        <input class="vertical-spin" type="text" data-bts-button-down-class="btn btn-default"   data-bts-button-up-class="btn btn-default" value="15" name="vertical-spin">
-                                                        </td>
-                                                        <td>$470</td>
-                                                        
-                                                        <td><a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip"><i class="fa fa-trash"></i></a></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                    </fieldset>
-                                </form>
-                            </div>
+                                    </div>
+                                </fieldset>
+
+                                <h3><span class="number"><i class="icon-credit-card txt-black"></i></span><span
+                                        class="head-font capitalize-font">payment</span></h3>
+                                <fieldset>
+                                    <!--CREDIT CART PAYMENT-->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="control-label mb-10" for="sub">Subscription:</label>
+                                                <select id="sub" class="form-control" name="sub">
+                                                    <option value="1">1 Month </option>
+                                                    <option value="3">3 Months</option>
+                                                    <option value="6">6 Months</option>
+                                                    <option value="9">9 Months</option>
+                                                    <option value="12">12 Months</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-10" for="cardNo">Credit Card
+                                                    Number:</label>
+                                                <input type="text" id="cardNo" data-mask="9999-9999-9999-9999"
+                                                    class="form-control required" name="car_number" value="" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-10" for="cvv">card cvv:</label>
+                                                <input type="text" id="cvv" class="form-control  required"
+                                                    data-mask="999" name="car_code" value="" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-10">expiration date:</label>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                        <select class="form-control required" name="month">
+                                                            <option value="">Month</option>
+                                                            <option value="1">01</option>
+                                                            <option value="2">02</option>
+                                                            <option value="3">03</option>
+                                                            <option value="4">04</option>
+                                                            <option value="5">05</option>
+                                                            <option value="6">06</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                        <select class="form-control required" name="year">
+                                                            <option value="1">Year</option>
+                                                            <option value="2">2001</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-0">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <ul class="cards">
+                                                            <li class="visa hand"><img src="../img/1-s.png"
+                                                                    alt="card" /></li>
+                                                            <li class="mastercard hand"><img src="../img/2-s.png"
+                                                                    alt="card" /></li>
+                                                            <li class="amex hand"><img src="../img/3-s.png"
+                                                                    alt="card" /></li>
+                                                            <li class="amex hand"><img src="../img/4-s.png"
+                                                                    alt="card" /></li>
+                                                        </ul>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--CREDIT CART PAYMENT END-->
+                                </fieldset>
+
+                                <h3><span class="number"><i class="icon-basket-loaded txt-black"></i></span><span
+                                        class="head-font capitalize-font">review cart</span></h3>
+                                <fieldset>
+                                    <table class="table display product-overview" id="datable_1">
+                                        <thead>
+                                            <tr>
+                                                <th>Photo</th>
+                                                <th>Product</th>
+                                                <th>price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <img src="../img/chair.jpg" alt="iMac" width="80">
+                                                </td>
+                                                <td id="sub_details">1 Month Subscription</td>
+
+                                                <td id="amt_details_1">$100</td>
+                                            </tr>
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="2">Subtotal:</th>
+                                                <th id="amt_details">$100</th>
+                                            </tr>
+                                        </tfoot>
+
+                                    </table>
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- /Row -->
-            
         </div>
+        <!-- /Row -->
 
-    <!-- Footer -->
-    <footer class="footer pl-30 pr-30">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <p>2018 &copy; Admintres. Pampered by Hencework</p>
+    </div>
+    <!-- sample modal content -->
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+                    <h5 class="modal-title" id="myModalLabel"><i style="padding-right: 10px; color: orange"
+                            class="fa fa-warning"></i>Risk Tolerance</h5>
                 </div>
-                <div class="col-sm-6 text-right">
-                    <p>Follow Us</p>
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                <div class="modal-body">
+                    <h5 class="mb-15">Determining your risk tolerance!</h5>
+                    <p>Different investors have different risk tolerances.</p>
+                    <p>The following risk tolerance questions is designed to measure an individual’s ability and
+                        willingness to accept uncertainties in their investment’s performance. </p>
+                    <p>Please answer the following questions to help your advisor establish your current risk profile.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Got it</button>
                 </div>
             </div>
+            <!-- /.modal-content -->
         </div>
-    </footer>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- sample modal content -->
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="enterPinModal"
+        aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h5 class="modal-title" id="mySmallModalLabel">Enter Debit Card PIN</h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label mb-10">PIN:</label>
+                            <input type="password" maxlength="4" class="form-control" id="pin" name="pin">
+                        </div>                        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Pay</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Footer -->
+    <% include ../partials/footer %>
     <!-- /Footer -->
 
 </div>
@@ -839,6 +990,14 @@
 <!-- /#wrapper -->
 
 <!-- JavaScript -->
+
+<script type="text/javascript">
+    $(window).on('load', function () {
+        setTimeout(function () {
+            $('#myModal').modal('show');
+        }, 2500);
+    });
+</script>
 
 <!-- jQuery -->
 <script src="/vendors/bower_components/jquery/dist/jquery.min.js"></script>
@@ -868,7 +1027,7 @@
 
 <!-- Bootstrap Touchspin JavaScript -->
 <script src="/vendors/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
-		
+
 <!-- Starrr JavaScript -->
 <script src="/dist/js/starrr.js"></script>
 <!-- Form Picker Init JavaScript -->
