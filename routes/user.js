@@ -100,11 +100,23 @@ router.route('/transactions')
 
       console.log('dashboard')
 
-      if (user.role === 2) {
-        console.log(user)
-        res.render('customer/transactions', { user: user, page: 'Transactions' })
-      }
+      Activity.find({ owner: user._id }, (err, activities) => {
+        if (err) return next(err);
 
+        var notifications = []
+        activities.forEach((activity) => {
+          if (activity.read === false) {
+            notifications.push({
+              content: activity.content,
+              created: timeDifference(activity.created)
+            });
+          }
+        })
+        if (user.role === 2) {
+          console.log(user)
+          res.render('customer/transactions', { user: user, notifications: notifications, page: 'Transactions' })
+        }
+      })       
     })
   })
 

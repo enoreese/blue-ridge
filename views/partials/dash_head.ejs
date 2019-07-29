@@ -17,18 +17,24 @@
 	<!-- Data table CSS -->
 	<link href="/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet"
 		type="text/css" />
+
 	<link href="/vendors/bower_components/jquery-wizard.js/css/wizard.css" rel="stylesheet" type="text/css" />
 
 	<!-- jquery-steps css -->
-	<link rel="stylesheet" href="../vendors/bower_components/jquery.steps/demo/css/jquery.steps.css">
+	<link rel="stylesheet" href="/vendors/bower_components/jquery.steps/demo/css/jquery.steps.css">
+
 	<!-- Toast CSS -->
 	<link href="/vendors/bower_components/jquery-toast-plugin//dist/jquery.toast.min.css" rel="stylesheet"
 		type="text/css">
 
 	<link href="/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
 		rel="stylesheet" type="text/css" />
+
 	<link href="/vendors/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"
 		type="text/css" />
+
+	<!-- bootstrap-touchspin CSS -->
+	<link href="/vendors/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" type="text/css"/>
 
 
 	<!-- Morris Charts CSS -->
@@ -38,14 +44,20 @@
 	<link href="/vendors/bower_components/bootstrap-select//dist/css/bootstrap-select.min.css" rel="stylesheet"
 		type="text/css" />
 
-	<link href="/vendors/bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet"
+	<!-- bootstrap-tagsinput CSS -->
+	<link href="/vendors/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet"
 		type="text/css" />
+
 
 	<!-- vector map CSS -->
 	<link href="/vendors/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" type="text/css" />
 
 	<!-- Custom CSS -->
 	<link href="/dist/css/style.css" rel="stylesheet" type="text/css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -61,7 +73,7 @@
 				<div class="mobile-only-brand pull-left">
 					<div class="nav-header pull-left">
 						<div class="logo-wrap">
-							<a href="index.html">
+							<a href="/dashboard">
 								<img style="font-size: 30px" class="brand-img" src="/img/logo-alone.png" alt="brand" />
 								<span class="brand-text"><img src="/img/brand-logo.png" alt="brand" /></span>
 							</a>
@@ -90,7 +102,8 @@
 
 						<li class="dropdown alert-drp">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-									class="ti-bell top-nav-icon"></i><span class="top-nav-icon-badge"><%= notifications.length %></span></a>
+									class="ti-bell top-nav-icon"></i><span
+									class="top-nav-icon-badge"><%= notifications.length %></span></a>
 							<ul class="dropdown-menu alert-dropdown" data-dropdown-in="bounceIn"
 								data-dropdown-out="bounceOut">
 								<li>
@@ -207,7 +220,7 @@
 							</ul>
 						</li>
 						<li class="dropdown auth-drp">
-							<a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="../img/user1.png"
+							<a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown"><img src="/img/favicon.png"
 									alt="user_auth" class="user-auth-img img-circle" /><span
 									class="user-online-status"></span></a>
 							<ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX"
