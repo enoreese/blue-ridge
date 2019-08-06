@@ -22,7 +22,7 @@ const borrower = 2;
 
 //HOMEPAGE ROUTE
 router.get('/', (req, res, next) => {
-    res.render('web/home');
+    res.render('web/index');
 });
 
 //FORGOT PASSWORD
