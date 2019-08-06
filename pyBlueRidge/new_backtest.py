@@ -1,34 +1,180 @@
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
-
-import datetime
-import os.path
-import sys
 import backtrader as bt
+import backtrader.indicators as btind
 import pandas as pd
+import collections
+from datetime import datetime
 
+MAINSIGNALS = collections.OrderedDict(
+    (
+     ('longonly', bt.SIGNAL_LONG),
+     ('shortonly', bt.SIGNAL_SHORT),)
+)
+
+
+EXITSIGNALS = {
+    'longexit': bt.SIGNAL_LONGEXIT,
+    'shortexit': bt.SIGNAL_LONGEXIT,
+}
+
+
+class MyStrategy(bt.Strategy):
+
+    def __init__(self):
+
+        sma1 = btind.SimpleMovingAverage(self.data)
+        ema1 = btind.ExponentialMovingAverage()
+
+        close_over_sma = self.data.close > sma1
+        close_over_ema = self.data.close > ema1
+        sma_ema_diff = sma1 - ema1
+
+        self.buy_sig = close_over_sma
+
+    def next(self):
+
+        if self.buy_sig:
+            self.buy()
+
+class EMALongSignal(bt.Strategy):
+    lines = ('signal',)
+    params = (('fastEMA', 6),
+              ('slowEMA', 150)
+              )
+
+    def __init__(self):
+        self.__fastEMA = btind.ExponentialMovingAverage()
+        self.__slowEMA = btind.ExponentialMovingAverage()
+
+        self.long_alert = self.data.close > self.__slowEMA
+        self.short_alert = self.data.close < self.__fastEMA
+
+        self.long_confirmation = self.__fastEMA > self.__slowEMA
+        self.short_confirmation = self.__fastEMA < self.__slowEMA
+
+        self.long_signal = self.data.close <= self.__fastEMA
+        self.short_signal = self.data.close >= self.__fastEMA
+
+        self.buy_sig = bt.And(self.long_alert, self.long_confirmation, self.long_signal)
+        self.sell_sig = bt.And(self.short_alert, self.short_confirmation, self.short_signal)
+
+        # if self.__slowEMA[-1] is None or self.__fastEMA[-1] is None:
+        #     return
+        # self.lines.signal = self.enterLongSignal()
+
+    def next(self):
+        if self.buy_sig:
+            print('buy')
+            self.buy()
+
+        if self.sell_sig:
+            print('sell')
+            self.sel()
+
+    def enterLongSignal(self):
+        print("Long at $%.2f" % (self.data.close[0]))
+        if self.enterAlertLong():
+            self.info("Long Alert at $%.2f" % (self.data.close[0]))
+            if self.enterConfirmationLong():
+                self.info("Long Confirmation at $%.2f" % (self.data.close[0]))
+                if self.data.close[0] <= self.__fastEMA:
+                    return 1
+
+    def enterAlertLong(self):
+
+        return btind.CrossOver(self.data.close, self.__slowEMA) > 0 # self.data.lines.close[0] > self.__slowEMA.lines.ema[0] # cross.cross_above(self.__priceDS, self.__fastEMA) > 0
+
+    def enterConfirmationLong(self):
+
+        return self.__fastEMA > self.__slowEMA # cross.cross_below(self.__slowEMA, self.__fastEMA) > 0
+
+class EMAShortSignal(bt.Indicator):
+    lines = ('signal',)
+    params = (('fastEMA', 6),
+              ('slowEMA', 150)
+              )
+
+    def __init__(self):
+        self.__fastEMA = bt.indicators.EMA(self.data, self.p.fastEMA)
+        self.__slowEMA = bt.indicators.EMA(self.data, self.p.slowEMA)
+
+    def next(self):
+        print("Short at $%.2f" % (self.data.close[0]))
+        self.lines.signal = self.enterShortSignal()
+
+    def enterShortSignal(self):
+        # self.info("Short at $%.2f" % (bar.getPrice()))
+        if self.enterAlertShort():
+            self.info("Short Alert at $%.2f" % (self.data.close[0]))
+            if self.enterConfirmationShort():
+                self.info("Short Confirmation at $%.2f" % (self.data.close[0]))
+                if self.data.close >= self.__fastEMA:
+                    return -1
+
+    def enterAlertShort(self):
+
+        return self.data.close < self.__slowEMA # cross.cross_below(self.__priceDS, self.__fastEMA) > 0
+
+    def enterConfirmationShort(self):
+
+        return self.__fastEMA < self.__slowEMA # cross.cross_above(self.__slowEMA, self.__fastEMA) > 0
+
+
+class LongExitSignal(bt.Indicator):
+    lines = ('signal',)
+    params = (('fastEMA', 6),
+              ('slowEMA', 150)
+              )
+
+    def __init__(self):
+        self.__fastEMA = bt.indicators.EMA(self.data, self.p.fastEMA)
+        self.__slowEMA = bt.indicators.EMA(self.data, self.p.slowEMA)
+        self.lines.signal = self.exitShortSignal()
+
+    def exitShortSignal(self):
+        if self.data.close < self.__fastEMA:
+            return 1
+
+class ShortExitSignal(bt.Indicator):
+    lines = ('signal',)
+    params = (('fastEMA', 6),
+              ('slowEMA', 150)
+              )
+
+    def __init__(self):
+        self.__fastEMA = bt.indicators.EMA(self.data, self.p.fastEMA)
+        self.__slowEMA = bt.indicators.EMA(self.data, self.p.slowEMA)
+        self.lines.signal = self.exitShortSignal()
+
+    def exitShortSignal(self):
+        if self.data.close > self.__fastEMA:
+            return -1
+
+# Create a Stratey
 class TestStrategy(bt.Strategy):
+
     def log(self, txt, dt=None):
+        ''' Logging function fot this strategy'''
         dt = dt or self.datas[0].datetime.date(0)
         print('%s, %s' % (dt.isoformat(), txt))
 
     def __init__(self):
+        # Keep a reference to the "close" line in the data[0] dataseries
         self.dataclose = self.datas[0].close
+
+        # To keep track of pending orders and buy price/commission
         self.order = None
         self.buyprice = None
         self.buycomm = None
-        self.__shortPos = None
-        self.__longPos = None
-
-        # self.sma = bt.indicators.SimpleMovingAverage(self.datas[0], period=15)
-        self.__fastEMA = bt.indicators.ExponentialMovingAverage(self.datas[0], period=6)
-        self.__slowEMA = bt.indicators.ExponentialMovingAverage(self.datas[0], period=150)
-        # self.rsi = bt.indicators.RelativeStrengthIndex()
 
     def notify_order(self, order):
         if order.status in [order.Submitted, order.Accepted]:
+            # Buy/Sell order submitted/accepted to/by broker - Nothing to do
             return
 
+        # Check if an order has been completed
+        # Attention: broker could reject order if not enough cash
         if order.status in [order.Completed]:
             if order.isbuy():
                 self.log(
@@ -50,9 +196,7 @@ class TestStrategy(bt.Strategy):
         elif order.status in [order.Canceled, order.Margin, order.Rejected]:
             self.log('Order Canceled/Margin/Rejected')
 
-        # Write down: no pending order
-        self.__longPos = None
-        self.__shortPos = None
+        self.order = None
 
     def notify_trade(self, trade):
         if not trade.isclosed:
@@ -70,104 +214,30 @@ class TestStrategy(bt.Strategy):
             return
 
         # Check if we are in the market
-        if self.__shortPos is None:
-            if self.enterShortSignal():
-                self.log('SELL CREATE, %.2f' % self.dataclose[0])
-                shares = 20 #int(self.getBroker().getCash() * 0.9 / bars[self.__instrument].getPrice())
-                self.__shortPos = self.sell(size=shares)
+        if not self.position:
 
             # Not yet ... we MIGHT BUY if ...
-            # if self.dataclose[0] < self.fastEma[0]:
-            #     # current close less than previous close
-            #
-            #     if self.dataclose[0] < self.dataclose[-2]:
-            #         # previous close less than the previous close
-            #
-            #         # BUY, BUY, BUY!!! (with default parameters)
-            #         self.log('BUY CREATE, %.2f' % self.dataclose[0])
-            #
-            #         # Keep track of the created order to avoid a 2nd order
-            #         self.order = self.buy()
-        elif self.__longPos is None:
-            if self.enterLongSignal():
-                self.log('BUY CREATE, %.2f' % self.dataclose[0])
-                shares = 20 # int(self.getBroker().getCash() * 0.9 / bar.getPrice())
-                self.__longPos = self.buy(size=shares)
+            if self.dataclose[0] < self.dataclose[-1]:
+                    # current close less than previous close
+
+                    if self.dataclose[-1] < self.dataclose[-2]:
+                        # previous close less than the previous close
+
+                        # BUY, BUY, BUY!!! (with default parameters)
+                        self.log('BUY CREATE, %.2f' % self.dataclose[0])
+
+                        # Keep track of the created order to avoid a 2nd order
+                        self.order = self.buy()
+
         else:
-            if self.__longPos is not None:
-                if self.exitLongSignal():
-                    self.log('EXIT LONG, %.2f' % self.dataclose[0])
-                    self.__longPos = self.sell(size=2)
-                    self.__longPos = None
-                # elif self.enterLongSignal():
-                #     self.log('BUY EXTRA CREATE, %.2f' % self.dataclose[0])
-                #     shares = 1  # int(self.getBroker().getCash() * 0.9 / bars[self.__instrument].getPrice())
-                #     self.__longPos = self.buy(size=shares)
-                # elif self.stopLossLong():
-                #     self.info("Stop Loss Exit long")
-                #     self.__longPos.close()
-            elif self.__shortPos is not None:
-                if self.exitShortSignal():
-                    self.log('EXIT SHORT, %.2f' % self.dataclose[0])
-                    self.__shortPos = self.buy(size=2)
-                    self.__shortPos = None
-                # elif self.enterShortSignal():
-                #     self.log('SELL EXTRA CREATE, %.2f' % self.dataclose[0])
-                #     shares = 1  # int(self.getBroker().getCash() * 0.9 / bars[self.__instrument].getPrice())
-                #     self.__shortPos = self.sell(size=shares)
-                # elif self.stopLossShort():
-                #     self.info("Stop Loss Exit Short")
-                #     self.__shortPos.close()
 
             # Already in the market ... we might sell
-            # if len(self) >= (self.bar_executed + 5):
-            #     # SELL, SELL, SELL!!! (with all possible default parameters)
-            #     self.log('SELL CREATE, %.2f' % self.dataclose[0])
-            #
-            #     # Keep track of the created order to avoid a 2nd order
-            #     self.order = self.sell()
+            if len(self) >= (self.bar_executed + 5):
+                # SELL, SELL, SELL!!! (with all possible default parameters)
+                self.log('SELL CREATE, %.2f' % self.dataclose[0])
 
-    def enterLongSignal(self, ):
-        # self.info("Long at $%.2f" % (bar.getPrice()))
-        if self.enterAlertLong():
-            self.log('LONG ALERT, %.2f' % self.dataclose[0])
-            if self.enterConfirmationLong():
-                self.log('LONG CONFIRMATION, %.2f' % self.dataclose[0])
-                return self.dataclose[0] <= self.__fastEMA[0]
-
-    def enterShortSignal(self):
-        # self.info("Short at $%.2f" % (bar.getPrice()))
-        if self.enterAlertShort():
-            self.log('SHORT ALERT, %.2f' % self.dataclose[0])
-            if self.enterConfirmationShort():
-                self.log('SHORT CONFIRMATION, %.2f' % self.dataclose[0])
-                return self.dataclose[0] >= self.__fastEMA[0]
-
-        # return bar.getPrice() > self.__entrySMA[0] and self.__rsi[0] <= self.__overSoldThreshold
-
-    def enterAlertLong(self):
-
-        return self.dataclose[0] > self.__slowEMA[0] # cross.cross_above(self.__priceDS, self.__fastEMA) > 0
-
-    def enterConfirmationLong(self):
-
-        return self.__fastEMA[0] > self.__slowEMA[0] # cross.cross_below(self.__slowEMA, self.__fastEMA) > 0
-
-    def exitLongSignal(self):
-
-        return self.dataclose[0] < self.__fastEMA[0]
-
-    def enterAlertShort(self):
-
-        return self.dataclose[0] < self.__slowEMA[0] # cross.cross_below(self.__priceDS, self.__fastEMA) > 0
-
-    def enterConfirmationShort(self):
-
-        return self.__fastEMA[0] < self.__slowEMA[0] # cross.cross_above(self.__slowEMA, self.__fastEMA) > 0
-
-    def exitShortSignal(self):
-
-        return self.dataclose[0] > self.__fastEMA[0]
+                # Keep track of the created order to avoid a 2nd order
+                self.order = self.sell()
 
 
 dataframe = pd.read_csv(
@@ -176,15 +246,22 @@ dataframe = pd.read_csv(
         # parse_dates=True,
     )
 
-data = bt.feeds.PandasData(dataname=dataframe, datetime='Date Time')
+# data = bt.feeds.PandasData(dataname=dataframe, datetime='Date Time', fromdate=datetime(2016, 1, 1))
 
 # Create a Data Feed
-# data = bt.feeds.YahooFinanceData(dataname='MSFT',
-#                                  fromdate=datetime(2011, 1, 1),
-#                                  todate=datetime(2012, 12, 31))
+data = bt.feeds.YahooFinanceData(dataname='EURUSD=X',
+                                 fromdate=datetime(2011, 1, 1),
+                                 todate=datetime(2012, 12, 31))
 
 cerebro = bt.Cerebro()
-cerebro.addstrategy(TestStrategy)
+cerebro.addstrategy(EMALongSignal)
+
+# cerebro.add_signal(bt.SIGNAL_LONG, EMALongSignal)
+# cerebro.add_signal(bt.SIGNAL_SHORT, EMAShortSignal)
+#
+# cerebro.add_signal(bt.SIGNAL_LONGEXIT, LongExitSignal)
+# cerebro.add_signal(bt.SIGNAL_SHORTEXIT, ShortExitSignal)
+
 cerebro.broker.setcommission(commission=0.001)
 cerebro.adddata(data)  # Add the data feed
 # Set our desired cash start
