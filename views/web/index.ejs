@@ -71,11 +71,11 @@
                             <ul id="nav">
                                 <li class="active"><a href="#">Home</a>
                                 </li>
-                                <li><a href="about-us.html">About Us</a></li>
+                                <li><a href="#about-us">About Us</a></li>
 
-                                <li><a href="contact.html">Contacts</a></li>
-                                <li><a href="about-us.html">Login</a></li>
-                                <li><a href='services.html'>Sign up</a></li>
+                                <li><a href="#contact">Contacts</a></li>
+                                <li><a href="/auth/login">Login</a></li>
+                                <li><a href='/auth/login'>Sign up</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -103,21 +103,13 @@
                         </div>
                         <nav id="dropdown">
                             <ul>
-                                <li><a href="index.html">Home</a>
-                                    <ul>
-                                        <li><a href="#">Home 2</a></li>
-                                        <li><a href="#">Home 3</a></li>
-                                        <li><a href="#">Home 4</a></li>
-                                    </ul>
+                                <li class="active"><a href="#">Home</a>
                                 </li>
-                                <li><a href="about-us.html">About Us</a></li>
-                                <li><a href='services.html'>Services</a></li>
-                                <li><a href="blog.html">blog</a>
-                                    <ul>
-                                        <li><a href="blog-inner.html">Blog inner</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contacts</a></li>
+                                <li><a href="#about-us">About Us</a></li>
+
+                                <li><a href="#contact">Contacts</a></li>
+                                <li><a href="/auth/login">Login</a></li>
+                                <li><a href='/auth/login'>Sign up</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -190,7 +182,8 @@
                         data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
                         data-mask_out="x:inherit;y:inherit;" data-start="1000" data-splitin="none" data-splitout="none"
                         data-responsive_offset="on">
-                        <p>Blueridge is an online financial advisor built for people who refuse to settle for average investing. People who demand better. People like you.</p>
+                        <p>Blueridge is an online financial advisor built for people who refuse to settle for average
+                            investing. People who demand better. People like you.</p>
                     </div>
 
                     <div class="tp-caption slide-button" data-x="left" data-hoffset="['0','0','0','0','20','0']"
@@ -263,7 +256,8 @@
                     <div class="features-content">
                         <span class="features-num">02</span>
                         <h2>personal finance</h2>
-                        <p>Let us take charge of your investment life and generate steady returns based on your investing preference</p>
+                        <p>Let us take charge of your investment life and generate steady returns based on your
+                            investing preference</p>
                         <a class="arrow pull-right" href="#"><i class="arrow_right"></i></a>
                     </div>
                 </div>
@@ -271,7 +265,8 @@
                     <div class="features-content">
                         <span class="features-num">03</span>
                         <h2>trust management</h2>
-                        <p>Have access to state of the art strategies that has been tested over years by experienced forex traders
+                        <p>Have access to state of the art strategies that has been tested over years by experienced
+                            forex traders
                         </p>
                         <a class="arrow pull-right" href="#"><i class="arrow_right"></i></a>
                     </div>
@@ -290,7 +285,7 @@
     </section>
     <!--End features area-->
     <!--start about area-->
-    <section class="about-area">
+    <section id="about-us" class="about-area">
         <div class="container">
             <h2 class="section-title">about us</h2>
             <div class="media about-content">
@@ -308,8 +303,10 @@
                 <div class="media-body">
                     <div class="texts">
                         <h2>Always there to help you reach your investment goals.</h2>
-                        <p>Blueridge gives investors access to advanced trading algorithms and artificial intelligence giving them a competitive advantage over the market. We are here to make the difficult part of investing easy using various automated strategies to maximize market performance.</p>
-                        <p>“Don’t work for money; make it work for you.” 
+                        <p>Blueridge gives investors access to advanced trading algorithms and artificial intelligence
+                            giving them a competitive advantage over the market. We are here to make the difficult part
+                            of investing easy using various automated strategies to maximize market performance.</p>
+                        <p>“Don’t work for money; make it work for you.”
                             -Robert Kiyosaki</p>
                         <button type="button" class="btn button pull-right">read more<i
                                 class="arrow_right"></i></button>
@@ -517,13 +514,15 @@
         </section> -->
     <!--End latest blog area-->
     <!--start question area-->
-    <section class="question-area">
+    <section id="contact" class="question-area">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="question-content">
                         <h2>If you have a question, you can contact us. Just fill a form.</h2>
-                        <p>We're available seven days a week to help answer questions about your account. Whether you have questions about the services we provide or need inquiry, Don't hesistate to contact us.</p>
+                        <p>We're available seven days a week to help answer questions about your account. Whether you
+                            have questions about the services we provide or need inquiry, Don't hesistate to contact us.
+                        </p>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -601,7 +600,10 @@
                     <div class="col-md-3 col-sm-6 col-xs-6">
                         <div class="widget about-widget">
                             <h2 class="widget-tittle">About Us</h2>
-                            <p>Blueridge gives investors access to advanced trading algorithms and artificial intelligence giving them a competitive advantage over the market. We are here to make the difficult part of investing easy using various automated strategies to maximize market performance. </p>
+                            <p>Blueridge gives investors access to advanced trading algorithms and artificial
+                                intelligence giving them a competitive advantage over the market. We are here to make
+                                the difficult part of investing easy using various automated strategies to maximize
+                                market performance. </p>
                             <a href="#" class="logo">
                                 <img src="/assets/image/footer-logo.png" alt="">
                             </a>
@@ -684,6 +686,19 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
     <!--End footer area-->
     <!--All JS Files Here-->
     <script src="/assets/js/jquery-2.2.0.min.js"></script>
