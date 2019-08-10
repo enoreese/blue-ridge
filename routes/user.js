@@ -51,7 +51,7 @@ router.route('/dashboard')
           console.log(user)
           res.render('customer/dashboard', { user: user, notifications: notifications, page: 'Dashboard' })
         }
-      })      
+      })
     })
   })
   .post(middleware.isLoggedIn, (req, res, next) => {
@@ -116,7 +116,7 @@ router.route('/transactions')
           console.log(user)
           res.render('customer/transactions', { user: user, notifications: notifications, page: 'Transactions' })
         }
-      })       
+      })
     })
   })
 
@@ -130,34 +130,44 @@ router.post('/change-password', middleware.isLoggedIn, (req, res, next) => {
 
     var is_same = user.comparePassword(old_password);
     if (is_same === false) {
-      req.flash('error', 'Your old password is incorrect!')
+      req.flash('error', 'Your old password is incorrect!');
+      res.redirect('/settings');
     }
+    else{
 
     if (old_password === "" || new_password === "" || conf_password === "") {
       req.flash('error', 'All fields are required!');
       res.redirect('/settings');
     }
     if (new_password !== conf_password) {
-      req.flash('error', 'New password and confirm password do not match!')
+      req.flash('error', 'New password and confirm password do not match!');
+      res.redirect('/settings');
     }
-
-    user.password = new_password;
-    user.save((err) => {
-      if (err) return next(err);
-
-      var activity = new Activity();
-      activity.owner = user._id;
-      activity.content = "Password was changed!";
-      activity.color = "yellow";
-      activity.markModified('Activity');
-
-      activity.save((err) => {
+    if (old_password == new_password) {
+      req.flash('error', 'New password and Old password are the same!');
+      res.redirect('/settings');
+    }
+    else {
+      user.password = new_password;
+      user.save((err) => {
         if (err) return next(err);
 
-        req.flash('success', 'Your password has been changed successfully');
-        res.redirect('/settings');
+        var activity = new Activity();
+        activity.owner = user._id;
+        activity.content = "Password was changed!";
+        activity.color = "yellow";
+        activity.markModified('Activity');
+
+        activity.save((err) => {
+          if (err) return next(err);
+
+          req.flash('success', 'Your password has been changed successfully');
+          res.redirect('/settings');
+        })
       })
-    })
+
+    }
+  }
   })
 })
 
@@ -260,7 +270,7 @@ router.route('/profile')
     })
   })
 
-  router.route('/new-bot')
+router.route('/new-bot')
   .get(middleware.isLoggedIn, (req, res, next) => {
     User.findOne({ _id: req.user._id }, function (err, user) {
       if (err) return next(err)
