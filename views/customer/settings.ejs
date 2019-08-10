@@ -654,30 +654,30 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-xs-12">
                                         <div class="form-wrap">
-                                            <form>
+                                            <form action="/change-password" method="POST">
                                                 <div class="form-group">
                                                     <label class="control-label mb-10" for="exampleInputpwd_1">Old Password</label>
                                                     <div class="input-group">
                                                         <div class="input-group-addon"><i class="icon-lock"></i></div>
-                                                        <input type="password" class="form-control" id="exampleInputpwd_1" placeholder="Enter email">
+                                                        <input type="password" class="form-control" id="exampleInputpwd_1" name="old_password" placeholder="Enter old password">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label mb-10" for="exampleInputpwd_2">New Password</label>
                                                     <div class="input-group">
                                                         <div class="input-group-addon"><i class="icon-lock"></i></div>
-                                                        <input type="password" class="form-control" id="exampleInputpwd_2" placeholder="Enter email">
+                                                        <input type="password" class="form-control" id="exampleInputpwd_2" name="new_password" placeholder="Enter new password">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="control-label mb-10" for="exampleInputpwd_2">Confirm New Password</label>
                                                     <div class="input-group">
                                                         <div class="input-group-addon"><i class="icon-lock"></i></div>
-                                                        <input type="password" class="form-control" id="exampleInputpwd_2" placeholder="Enter email">
+                                                        <input type="password" class="form-control" id="exampleInputpwd_2" name="conf_password" placeholder="Confirm new password">
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-success mr-10">Submit</button>
-                                                <button type="submit" class="btn btn-default" onclick="pwd_btn_close()">Cancel</button>
+                                                <button type="button" class="btn btn-default" onclick="pwd_btn_close()">Cancel</button>
                                             </form>
                                         </div>
                                     </div>
