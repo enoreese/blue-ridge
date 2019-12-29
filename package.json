@@ -30,7 +30,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "handlebar": "^1.0.0",
-    "handlebars": "^4.1.2",
+    "handlebars": "^4.3.0",
     "method-override": "^3.0.0",
     "mongo": "^0.1.0",
     "mongoose": "^5.4.0",
