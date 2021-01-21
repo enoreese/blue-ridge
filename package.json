@@ -48,7 +48,7 @@
     "paystack-api": "^2.0.1",
     "paystack-js": "^0.18.1",
     "sendgrid": "^5.2.3",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.0",
     "unirest": "^0.6.0"
   },
   "engines": {
